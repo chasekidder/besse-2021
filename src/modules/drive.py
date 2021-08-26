@@ -7,6 +7,10 @@ RF_MOTOR_PIN = 19
 RR_MOTOR_PIN = 20
 
 class JAGUAR_PWM:
+    # https://robotcombat.com/products/images/IFI-JAGUAR_datasheet.pdf
+    # http://www.team358.org/files/programming/ControlSystem2015-2019/specs/217-3367-VEXpro_Jaguar_GettingStartedGuide.pdf
+    # https://frc971.org/files/jaguar/2012/MDL-BDC24_BlackJaguar-FRC_2012_FAQ-spma033a.pdf
+    
     FREQUENCY = 15000 # 15kHz
     FRAME_WIDTH = 20/1000 # 20ms (5.0125ms <=> 29.985ms)
     MIN_PULSE_WIDTH = 0.67/1000 # 0.67ms
