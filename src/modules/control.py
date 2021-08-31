@@ -179,4 +179,4 @@ class controller():
     def __axis_drive(self) -> None:
         robot.drive(self.__controller.axis_l._value_y, self.__controller.axis_r._value_y)
 
-        print(f"L: {self.__controller.axis_l._value_y}, R: {self.__controller.axis_r._value_y}")
+        #print(f"L: {self.__controller.axis_l._value_y}, R: {self.__controller.axis_r._value_y}")
