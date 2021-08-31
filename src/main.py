@@ -33,7 +33,7 @@ def main():
         else:
             pass
 
-    ctrl.__controller.close()
+    #ctrl.__controller.close()
 
 
 
