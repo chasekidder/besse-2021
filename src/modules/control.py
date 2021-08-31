@@ -23,10 +23,19 @@
 # Xpad docs https://www.kernel.org/doc/Documentation/input/xpad.txt
 # https://wiki.unity3d.com/index.php?title=Xbox360Controller
 
+import modules.drive as drive
+
 from xbox360controller import Xbox360Controller
 import time
 
 CONTROLLER_ID = 0
+
+robot = drive.DriveTrain()
+
+axis_values = {
+    "axis_l": 0,
+    "axis_r": 0
+}
 
 class LED_MODE:
     BLINK = 1
@@ -81,14 +90,14 @@ class controller():
         self.__controller.button_thumb_l.when_released = self.__L_shoulder_released
         self.__controller.button_thumb_r.when_released = self.__R_shoulder_released
 
-        self.__controller.axis_l.when_moved = self.__axis_moved
-        self.__controller.axis_r.when_moved = self.__axis_moved
+        self.__controller.axis_l.when_moved = self.__axis_update
+        self.__controller.axis_r.when_moved = self.__axis_update
 
     def rumble(self) -> None:
         # Rumble for 0.5 seconds at 50% on each side
-        # if self.__controller.has_rumble:
-        #     self.__controller.set_rumble(0.5, 0.5, 0.5)
-        self.__controller.set_rumble(0.5, 0.5, 0.5)
+        if self.__controller.has_rumble:
+            self.__controller.set_rumble(0.5, 0.5, 0.5)
+        
 
     def LED(self, mode:int) -> None:
         if self.__controller.has_led:
@@ -106,8 +115,7 @@ class controller():
         pass
 
     def __A_button_pressed(self, button):
-        #self.LED(LED_MODE.ROTATE_TWO)
-        self.rumble()
+        pass
 
     def __B_button_pressed(self, button):
         pass
@@ -164,6 +172,10 @@ class controller():
     def __R_shoulder_released(self, button):
         pass
 
-    # Axis Move Function
-    def __axis_moved(self, axis):
-        pass
+    # Axis Move Functions
+    def __axis_update(self, axis) -> None:
+        axis_values[axis.name] = axis.y
+        self.__axis_drive()
+        
+    def __axis_drive(self) -> None:
+        robot.drive(axis_values["axis_l"], axis_values["axis_r"], False, False)

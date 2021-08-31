@@ -15,7 +15,7 @@
 # main.py
 
 import modules.control as control
-import modules.drive as drive
+
 import modules.effects as effects
 
 import time
@@ -24,20 +24,17 @@ def main():
     loop = 1
     start = time.time()
     ctrl = control.controller()
-    
-    try:
-        while loop == 1:
-            if time.time() >= start + 60:
-                print("Ending program...")
-                loop = 0
-            
-            else:
-                pass
 
-        ctrl.__controller.close()
+    while loop == 1:
+        if time.time() >= start + 60:
+            print("Ending program...")
+            loop = 0
+        
+        else:
+            pass
 
-    except KeyboardInterrupt:
-        pass
+    ctrl.__controller.close()
+
 
 
 
