@@ -61,6 +61,7 @@ class Motor():
     def drive(self, speed:float, reverseDirection:bool=False) -> None:
         if speed <= 1 and speed >= -1:
             self.__drive_motor(speed * int(reverseDirection))
+            print("To __drive_motor(): " + str(speed * int(reverseDirection)))
         else:
             self.__motor_controller.value = 0
             self.__motor_controller.detach()
@@ -72,7 +73,7 @@ class Motor():
             self.__motor_controller.detach()
 
         if power >= -1 and power <= 1 and self.E_STOP == False:
-            print(power)
+            print("To MC: " + str(power))
             self.__motor_controller.value = power
         else:
             self.__motor_controller.value = 0
@@ -97,6 +98,7 @@ class DriveTrain():
 
             self.RF_motor.drive(speed_R * int(reverseDirectionR))
             self.RR_motor.drive(speed_R * int(reverseDirectionR))
+            print(f"L: {str(-1 * speed_L * int(reverseDirectionL))} , R: {str(speed_R * int(reverseDirectionR))}")
 
         else:
             self.LF_motor.E_STOP = True
