@@ -59,7 +59,6 @@ class Motor():
             print("Motor.backward(): Negative values not allowed.")
 
     def drive(self, speed:float, reverseDirection:int=1) -> None:
-        print(f"Speed Var: {speed}")
         if speed <= 1 and speed >= -1:
             self.__drive_motor(speed * reverseDirection)
             #print("To __drive_motor(): " + str(speed * reverseDirection))
