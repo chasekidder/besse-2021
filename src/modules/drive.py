@@ -72,6 +72,7 @@ class Motor():
             self.__motor_controller.detach()
 
         if power >= -1 and power <= 1 and self.E_STOP == False:
+            print(power)
             self.__motor_controller.value = power
         else:
             self.__motor_controller.value = 0
