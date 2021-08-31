@@ -25,17 +25,19 @@ def main():
     start = time.time()
     ctrl = control.controller()
     
-    while loop == 1:
-        if time.time() >= start + 60:
-            print("Ending program...")
-            loop = 0
-        
-        else:
-            ctrl.LED(control.LED_MODE.ROTATE_TWO)
+    try:
+        while loop == 1:
+            if time.time() >= start + 60:
+                print("Ending program...")
+                loop = 0
+            
+            else:
+                pass
 
-    ctrl.__controller.close()
+        ctrl.__controller.close()
 
-        
+    except KeyboardInterrupt:
+        pass
 
 
 

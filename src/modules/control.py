@@ -105,7 +105,7 @@ class controller():
         pass
 
     def __A_button_pressed(self, button):
-        pass
+        self.LED(control.LED_MODE.ROTATE_TWO)
 
     def __B_button_pressed(self, button):
         pass
