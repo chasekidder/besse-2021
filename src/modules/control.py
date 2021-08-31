@@ -174,11 +174,9 @@ class controller():
 
     # Axis Move Functions
     def __axis_update(self, axis) -> None:
-        axis_values[axis.name] = axis.y
         self.__axis_drive()
         
     def __axis_drive(self) -> None:
-        robot.drive(axis_values["axis_l"], axis_values["axis_r"])
-        axis_values["axis_l"] = 0
-        axis_values["axis_r"] = 0
-        print(f"L: {axis_values['axis_l']}, R: {axis_values['axis_r']}")
+        robot.drive(self.__controller.axis_l._value_y, self.__controller.axis_r._value_y)
+
+        print(f"L: {self.__controller.axis_l._value_y}, R: {self.__controller.axis_r._value_y}")
