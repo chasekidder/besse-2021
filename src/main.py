@@ -14,9 +14,6 @@
 
 # main.py
 
-# TODO:
-#   - controller.close() at cleanup
-
 import modules.control as control
 import modules.drive as drive
 import modules.effects as effects
@@ -35,6 +32,8 @@ def main():
         
         else:
             ctrl.LED(control.LED_MODE.ROTATE_TWO)
+
+    ctrl.__controller.close()
 
         
 
