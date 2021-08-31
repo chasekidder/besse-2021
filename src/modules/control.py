@@ -179,4 +179,6 @@ class controller():
         
     def __axis_drive(self) -> None:
         robot.drive(axis_values["axis_l"], axis_values["axis_r"])
+        axis_values["axis_l"] = 0
+        axis_values["axis_r"] = 0
         print(f"L: {axis_values['axis_l']}, R: {axis_values['axis_r']}")
