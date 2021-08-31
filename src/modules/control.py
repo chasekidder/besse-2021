@@ -86,8 +86,9 @@ class controller():
 
     def rumble(self) -> None:
         # Rumble for 0.5 seconds at 50% on each side
-        if self.__controller.has_rumble:
-            self.__controller.set_rumble(0.5, 0.5, 0.5)
+        # if self.__controller.has_rumble:
+        #     self.__controller.set_rumble(0.5, 0.5, 0.5)
+        self.__controller.set_rumble(0.5, 0.5, 0.5)
 
     def LED(self, mode:int) -> None:
         if self.__controller.has_led:
@@ -105,7 +106,8 @@ class controller():
         pass
 
     def __A_button_pressed(self, button):
-        self.LED(LED_MODE.ROTATE_TWO)
+        #self.LED(LED_MODE.ROTATE_TWO)
+        self.rumble()
 
     def __B_button_pressed(self, button):
         pass
