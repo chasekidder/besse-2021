@@ -91,15 +91,15 @@ class DriveTrain():
         self.RF_motor = Motor(RF_MOTOR_PIN)
         self.RR_motor = Motor(RR_MOTOR_PIN)
     
-    def drive(self, speed_L:float, speed_R:float,reverseDirectionL:bool=False, reverseDirectionR:bool=False) -> None:
+    def drive(self, speed_L:float, speed_R:float,reverseDirectionL:int=1, reverseDirectionR:int=1) -> None:
         # TODO: Find out which motors are reversed and refactor the inversion here
         if speed_L <= 1 and speed_L >= -1 and speed_R <= 1 and speed_R >= -1:
-            self.LF_motor.drive(-1 * speed_L * int(reverseDirectionL))
-            self.LR_motor.drive(-1 * speed_L * int(reverseDirectionL))
+            self.LF_motor.drive(-1 * speed_L * reverseDirectionL)
+            self.LR_motor.drive(-1 * speed_L * reverseDirectionL)
 
-            self.RF_motor.drive(speed_R * int(reverseDirectionR))
-            self.RR_motor.drive(speed_R * int(reverseDirectionR))
-            print(f"L: {str(-1 * speed_L * int(reverseDirectionL))} , R: {str(speed_R * int(reverseDirectionR))}")
+            self.RF_motor.drive(speed_R * reverseDirectionR)
+            self.RR_motor.drive(speed_R * reverseDirectionR)
+            print(f"L: {str(-1 * speed_L * reverseDirectionL)} , R: {str(speed_R * reverseDirectionR)}")
 
         else:
             self.LF_motor.E_STOP = True
