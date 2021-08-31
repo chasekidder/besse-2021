@@ -16,3 +16,30 @@
 
 # TODO:
 #   - controller.close() at cleanup
+
+import modules.control as control
+import modules.drive as drive
+import modules.effects as effects
+
+import time
+
+def main():
+    loop = 1
+    start = time.time()
+    ctrl = control.controller()
+    
+    while loop == 1:
+        if time.time() >= start + 60:
+            print("Ending program...")
+            loop = 0
+        
+        else:
+            ctrl.LED(control.LED_MODE.ROTATE_TWO)
+
+        
+
+
+
+
+if __name__ == "__main__":
+    main()
