@@ -95,73 +95,73 @@ class controller():
             time.sleep(1)
 
     # Button Press Functions
-    def __start_button_pressed(button):
+    def __start_button_pressed(self, button):
         pass
 
-    def __mode_button_pressed(button):
+    def __mode_button_pressed(self, button):
         pass
 
-    def __select_button_pressed(button):
+    def __select_button_pressed(self, button):
         pass
 
-    def __A_button_pressed(button):
+    def __A_button_pressed(self, button):
         pass
 
-    def __B_button_pressed(button):
+    def __B_button_pressed(self, button):
         pass
 
-    def __X_button_pressed(button):
+    def __X_button_pressed(self, button):
         pass
 
-    def __Y_button_pressed(button):
+    def __Y_button_pressed(self, button):
         pass
 
-    def __L_trigger_pressed(button):
+    def __L_trigger_pressed(self, button):
         pass
 
-    def __R_trigger_pressed(button):
+    def __R_trigger_pressed(self, button):
         pass
 
-    def __L_shoulder_pressed(button):
+    def __L_shoulder_pressed(self, button):
         pass
 
-    def __R_shoulder_pressed(button):
+    def __R_shoulder_pressed(self, button):
         pass
 
     # Button Release Functions
-    def __start_button_released(button):
+    def __start_button_released(self, button):
         pass
 
-    def __mode_button_released(button):
+    def __mode_button_released(self, button):
         pass
 
-    def __select_button_released(button):
+    def __select_button_released(self, button):
         pass
 
-    def __A_button_released(button):
+    def __A_button_released(self, button):
         pass
 
-    def __B_button_released(button):
+    def __B_button_released(self, button):
         pass
 
-    def __X_button_released(button):
+    def __X_button_released(self, button):
         pass
 
-    def __Y_button_released(button):
+    def __Y_button_released(self, button):
         pass
 
-    def __L_trigger_released(button):
+    def __L_trigger_released(self, button):
         pass
 
-    def __R_trigger_released(button):
+    def __R_trigger_released(self, button):
         pass
 
-    def __L_shoulder_released(button):
+    def __L_shoulder_released(self, button):
         pass
 
-    def __R_shoulder_released(button):
+    def __R_shoulder_released(self, button):
         pass
 
     # Axis Move Function
-    def __axis_moved(axis):
+    def __axis_moved(self, axis):
         pass
