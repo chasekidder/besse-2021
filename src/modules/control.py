@@ -54,7 +54,27 @@ class LED_MODE:
 class controller():
     def __init__(self) -> None:
         self.__controller = devices.gamepads[0]
-        self.recent_event = None
+        self.buttons = {
+            "BTN_START": 0,
+            "BTN_MODE": 0,
+            "BTN_SELECT": 0,
+            "BTN_NORTH": 0,
+            "BTN_SOUTH": 0,
+            "BTN_EAST": 0,
+            "BTN_WEST": 0,
+            "BTN_TR": 0,
+            "BTN_TL": 0,
+            "BTN_THUMBL": 0,
+            "BTN_THUMBR": 0,
+            "ABS_HAT0Y": 0, # -1 = UP, 1 = Down
+            "ABS_HAT0X": 0, # -1 = Left, 1 = Right
+            "ABS_Z": 0, # 0-255
+            "ABS_RZ": 0, # 0-255
+            "ABS_Y": 0, # - = Up, + = Down, -32768 - 32768
+            "ABS_X": 0, # - = Left, + = Right, -32768 - 32768
+            "ABS_RY": 0, # - = Up, + = Down, -32768 - 32768
+            "ABS_RX": 0, # - = Left, + = Right, -32768 - 32768
+        }
 
         print(self.__controller)
         
@@ -71,9 +91,10 @@ class controller():
             time.sleep(1)
 
 
-    def get_keys(self) -> None:
+    def get_buttons(self) -> None:
         events = get_gamepad()
         for event in events:
             print(event.ev_type, event.code, event.state)
-            #self.recent_event = event
+            if event.ev_type == "Key":
+                self.keys[event.code] = event.state
         

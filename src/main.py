@@ -15,15 +15,19 @@
 # main.py
 
 import modules.control as control
-
+import modules.drive as drive
 import modules.effects as effects
 
 import time
+
+def remap(x, in_min, in_max, out_min, out_max):
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 def main():
     loop = True
     start = time.time()
     ctrl = control.controller()
+    robot = drive.DriveTrain()
 
     while loop:
         if time.time() >= start + 60:
@@ -31,10 +35,13 @@ def main():
             loop = False
         
         else:
-            ctrl.get_keys()
-
+            ctrl.get_buttons()
+            
+            if ctrl.buttons["ABS_Y"] != 0 or ctrl.buttons["ABS_RY"] != 0:
+                l_ratio = remap(ctrl.buttons["ABS_Y"], -32768, 32768, -1, 1) 
+                r_ratio = remap(ctrl.buttons["ABS_RY"], -32768, 32768, -1, 1) 
     
-
+                robot.drive(l_ratio, r_ratio)
 
 
 
