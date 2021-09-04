@@ -96,5 +96,5 @@ class controller():
         for event in events:
             if event.ev_type == "Key":
                 print(event.code, event.state)
-                self.keys[event.code] = event.state
+                self.buttons[event.code] = event.state
         
