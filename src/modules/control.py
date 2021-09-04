@@ -94,7 +94,7 @@ class controller():
     def get_buttons(self) -> None:
         events = get_gamepad()
         for event in events:
-            print(event.ev_type, event.code, event.state)
             if event.ev_type == "Key":
+                print(event.code, event.state)
                 self.keys[event.code] = event.state
         
