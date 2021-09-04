@@ -21,19 +21,19 @@ import modules.effects as effects
 import time
 
 def main():
-    loop = 1
+    loop = True
     start = time.time()
     ctrl = control.controller()
 
-    while loop == 1:
+    while loop:
         if time.time() >= start + 60:
             print("Ending program...")
-            loop = 0
+            loop = False
         
         else:
-            pass
+            control.controller.get_keys()
 
-    #ctrl.__controller.close()
+    
 
 
 

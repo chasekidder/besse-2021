@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-# modules/control.py
+# modules/old_control.py
 
 # https://pimylifeup.com/xbox-controllers-raspberry-pi/
 # https://github.com/FRC4564/Xbox
@@ -25,17 +25,12 @@
 
 import modules.drive as drive
 
-from xbox360controller import Xbox360Controller
+from inputs import devices, get_gamepad
 import time
 
-CONTROLLER_ID = 0
+#robot = drive.DriveTrain()
 
-robot = drive.DriveTrain()
 
-axis_values = {
-    "axis_l": 0,
-    "axis_r": 0
-}
 
 class LED_MODE:
     BLINK = 1
@@ -58,40 +53,11 @@ class LED_MODE:
 
 class controller():
     def __init__(self) -> None:
-        self.__controller = Xbox360Controller(
-            index=CONTROLLER_ID, 
-            axis_threshold=0.2, 
-            raw_mode=False
-            )
+        self.__controller = devices.gamepads[0]
+        self.recent_event = None
 
-        print(self.__controller.info())
-
-        self.__controller.button_select.when_pressed = self.__select_button_pressed
-        self.__controller.button_mode.when_pressed = self.__mode_button_pressed
-        self.__controller.button_start.when_pressed = self.__start_button_pressed
-        self.__controller.button_a.when_pressed = self.__A_button_pressed
-        self.__controller.button_b.when_pressed = self.__B_button_pressed
-        self.__controller.button_x.when_pressed = self.__X_button_pressed
-        self.__controller.button_y.when_pressed = self.__Y_button_pressed
-        self.__controller.button_trigger_l.when_pressed = self.__L_trigger_pressed
-        self.__controller.button_trigger_r.when_pressed = self.__R_trigger_pressed
-        self.__controller.button_thumb_l.when_pressed = self.__L_shoulder_pressed
-        self.__controller.button_thumb_r.when_pressed = self.__R_shoulder_pressed
-
-        self.__controller.button_select.when_released = self.__select_button_released
-        self.__controller.button_mode.when_released = self.__mode_button_released
-        self.__controller.button_start.when_released = self.__start_button_released
-        self.__controller.button_a.when_released = self.__A_button_released
-        self.__controller.button_b.when_released = self.__B_button_released
-        self.__controller.button_x.when_released = self.__X_button_released
-        self.__controller.button_y.when_released = self.__Y_button_released
-        self.__controller.button_trigger_l.when_released= self.__L_trigger_released
-        self.__controller.button_trigger_r.when_released = self.__R_trigger_released
-        self.__controller.button_thumb_l.when_released = self.__L_shoulder_released
-        self.__controller.button_thumb_r.when_released = self.__R_shoulder_released
-
-        self.__controller.axis_l.when_moved = self.__axis_update
-        self.__controller.axis_r.when_moved = self.__axis_update
+        print(self.__controller)
+        
 
     def rumble(self) -> None:
         # Rumble for 0.5 seconds at 50% on each side
@@ -104,79 +70,10 @@ class controller():
             self.__controller.set_led(mode)
             time.sleep(1)
 
-    # Button Press Functions
-    def __start_button_pressed(self, button):
-        pass
 
-    def __mode_button_pressed(self, button):
-        pass
-
-    def __select_button_pressed(self, button):
-        pass
-
-    def __A_button_pressed(self, button):
-        pass
-
-    def __B_button_pressed(self, button):
-        pass
-
-    def __X_button_pressed(self, button):
-        pass
-
-    def __Y_button_pressed(self, button):
-        pass
-
-    def __L_trigger_pressed(self, button):
-        pass
-
-    def __R_trigger_pressed(self, button):
-        pass
-
-    def __L_shoulder_pressed(self, button):
-        pass
-
-    def __R_shoulder_pressed(self, button):
-        pass
-
-    # Button Release Functions
-    def __start_button_released(self, button):
-        pass
-
-    def __mode_button_released(self, button):
-        pass
-
-    def __select_button_released(self, button):
-        pass
-
-    def __A_button_released(self, button):
-        pass
-
-    def __B_button_released(self, button):
-        pass
-
-    def __X_button_released(self, button):
-        pass
-
-    def __Y_button_released(self, button):
-        pass
-
-    def __L_trigger_released(self, button):
-        pass
-
-    def __R_trigger_released(self, button):
-        pass
-
-    def __L_shoulder_released(self, button):
-        pass
-
-    def __R_shoulder_released(self, button):
-        pass
-
-    # Axis Move Functions
-    def __axis_update(self, axis) -> None:
-        self.__axis_drive()
+    def get_keys(self) -> None:
+        events = get_gamepad()
+        for event in events:
+            print(event.ev_type, event.code, event.state)
+            #self.recent_event = event
         
-    def __axis_drive(self) -> None:
-        robot.drive(self.__controller.axis_l._value_y, self.__controller.axis_r._value_y)
-
-        #print(f"L: {self.__controller.axis_l._value_y}, R: {self.__controller.axis_r._value_y}")
