@@ -31,7 +31,7 @@ def main():
             loop = False
         
         else:
-            control.controller.get_keys()
+            ctrl.get_keys()
 
     
 
