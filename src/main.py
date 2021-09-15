@@ -30,8 +30,8 @@ def main():
     robot = drive.DriveTrain()
 
     while loop:
-        if time.time() >= start + 60:
-            print("Ending program...")
+        if time.time() >= start + (60 * 5):
+            print("5 minutes elapsed. Ending program...")
             loop = False
         
         else:
