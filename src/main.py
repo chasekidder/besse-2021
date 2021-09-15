@@ -20,17 +20,18 @@ import modules.effects as effects
 
 import time
 
-ROBOT_ENABLED = False
 
-e_stop_counter = 0
-e_stop_timer = 0
-e_stop_timeout = 0
 
 def remap(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 def main():
     loop = True
+    ROBOT_ENABLED = False
+    e_stop_counter = 0
+    e_stop_timer = 0
+    e_stop_timeout = 0
+
     start = time.time()
     ctrl = control.controller()
     robot = drive.DriveTrain()
@@ -89,6 +90,10 @@ def main():
             # Check Enabled Keys are Held (R and L Triggers and Start Button must be held)
             elif ctrl.buttons["ABS_RZ"] > 250 and ctrl.buttons["ABS_Z"] > 250 and ctrl.buttons["BTN_START"] == 1:
                 ROBOT_ENABLED = True
+                print("Robot Enabled")
+
+            else:
+                print("Robot Not Enabled")
 
 
 

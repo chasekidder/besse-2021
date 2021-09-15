@@ -99,5 +99,5 @@ class controller():
                 self.buttons[event.code] = event.state
 
             elif event.ev_type == "Absolute":
-                print(event.code, event.state)
+                #print(event.code, event.state)
                 self.buttons[event.code] = event.state
