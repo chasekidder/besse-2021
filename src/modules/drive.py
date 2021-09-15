@@ -19,8 +19,8 @@ from gpiozero.pins.pigpio import PiGPIOFactory
 
 LF_MOTOR_PIN = 17
 LR_MOTOR_PIN = 18
-RF_MOTOR_PIN = 19
-RR_MOTOR_PIN = 20
+RF_MOTOR_PIN = 22
+RR_MOTOR_PIN = 23
 
 class JAGUAR_PWM:
     # https://robotcombat.com/products/images/IFI-JAGUAR_datasheet.pdf
