@@ -97,4 +97,7 @@ class controller():
             if event.ev_type == "Key":
                 print(event.code, event.state)
                 self.buttons[event.code] = event.state
-        
+
+            elif event.ev_type == "Absolute":
+                print(event.code, event.state)
+                self.buttons[event.code] = event.state
