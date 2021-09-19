@@ -17,10 +17,9 @@
 import gpiozero as gpio
 from gpiozero.pins.pigpio import PiGPIOFactory
 
-LF_MOTOR_PIN = 17
-LR_MOTOR_PIN = 18
-RF_MOTOR_PIN = 22
-RR_MOTOR_PIN = 23
+L_MOTOR_PIN = 22
+R_MOTOR_PIN = 23
+
 
 class JAGUAR_PWM:
     # https://robotcombat.com/products/images/IFI-JAGUAR_datasheet.pdf
@@ -61,7 +60,7 @@ class Motor():
     def drive(self, speed:float, reverseDirection:int=1) -> None:
         if speed <= 1 and speed >= -1:
             self.__drive_motor(speed * reverseDirection)
-            #print("To __drive_motor(): " + str(speed * reverseDirection))
+        
         else:
             self.__motor_controller.value = 0
             self.__motor_controller.detach()
@@ -73,8 +72,8 @@ class Motor():
             self.__motor_controller.detach()
 
         if power >= -1 and power <= 1 and self.E_STOP == False:
-            #print("To MC: " + str(power))
             self.__motor_controller.value = power
+
         else:
             self.__motor_controller.value = 0
             self.__motor_controller.detach()
@@ -85,45 +84,32 @@ class DriveTrain():
         # Change to pigpio pin factory for improved timing
         gpio.Device.pin_factory = PiGPIOFactory()
         
-        self.LF_motor = Motor(LF_MOTOR_PIN)
-        self.LR_motor = Motor(LR_MOTOR_PIN)
-        self.RF_motor = Motor(RF_MOTOR_PIN)
-        self.RR_motor = Motor(RR_MOTOR_PIN)
+        self.L_motor = Motor(L_MOTOR_PIN)
+        self.R_motor = Motor(R_MOTOR_PIN)
+
 
         self.E_STOP = False
     
     def drive(self, speed_L:float, speed_R:float,reverseDirectionL:int=1, reverseDirectionR:int=1) -> None:
         # TODO: Find out which motors are reversed and refactor the inversion here
         if speed_L <= 1 and speed_L >= -1 and speed_R <= 1 and speed_R >= -1 and self.E_STOP == False:
-            self.LF_motor.drive(-1 * speed_L * reverseDirectionL)
-            self.LR_motor.drive(-1 * speed_L * reverseDirectionL)
-
-            self.RF_motor.drive(speed_R * reverseDirectionR)
-            self.RR_motor.drive(speed_R * reverseDirectionR)
-            #print(f"L: {str(-1 * speed_L * reverseDirectionL)} , R: {str(speed_R * reverseDirectionR)}")
+            self.L_motor.drive(-1 * speed_L * reverseDirectionL)
+            self.R_motor.drive(speed_R * reverseDirectionR)
 
         else:
             self.E_STOP = True
-            self.LF_motor.E_STOP = True
-            self.LR_motor.E_STOP = True
-            self.RF_motor.E_STOP = True
-            self.RR_motor.E_STOP = True
+            self.L_motor.E_STOP = True
+            self.R_motor.E_STOP = True
 
-            self.LF_motor.drive(0)
-            self.LR_motor.drive(0)
-            self.RF_motor.drive(0)
-            self.RR_motor.drive(0)
+            self.L_motor.drive(0)
+            self.R_motor.drive(0)
 
             raise ValueError("Motors can not be given a value outside of -1 to +1.")
 
     def ENABLE_E_STOP(self):
         self.E_STOP = True
-        self.LF_motor.E_STOP = True
-        self.LR_motor.E_STOP = True
-        self.RF_motor.E_STOP = True
-        self.RR_motor.E_STOP = True
+        self.L_motor.E_STOP = True
+        self.R_motor.E_STOP = True
 
-        self.LF_motor.drive(0)
-        self.LR_motor.drive(0)
-        self.RF_motor.drive(0)
-        self.RR_motor.drive(0)
+        self.L_motor.drive(0)
+        self.R_motor.drive(0)
