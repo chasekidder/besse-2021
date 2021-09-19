@@ -14,11 +14,12 @@
 
 # main.py
 
-import modules.control as control
-import modules.drive as drive
-import modules.effects as effects
+
+
+
 
 import time
+import os
 
 
 
@@ -32,9 +33,37 @@ def main():
     e_stop_timer = 0
     e_stop_timeout = 0
 
+    leds = None
+    ctrl = None
+    robot = None
+
     start = time.time()
-    ctrl = control.controller()
+
+    # Effects Subsystem Initialization
+    import modules.effects as effects
+    leds = effects.LED_Strip()
+    leds.demo()
+
+    # Controller Subsystem Initialization
+    while ctrl is None:
+        if os.path.exists("/dev/input/js0"):
+            print("Controller Found!")
+            import modules.control as control
+            ctrl = control.controller()
+            #   The inputs library can only read the device 
+            #   list once so we need to make sure our OS 
+            #   is detecting the gamepad before importing.
+
+        else:
+            print("Waiting for controller...")
+            time.sleep(1)
+
+    # Drive Train Subsystem Initialization
+    import modules.drive as drive
     robot = drive.DriveTrain()
+
+
+    
 
     while loop:
         if time.time() >= start + (60 * 5):
@@ -93,10 +122,14 @@ def main():
                 print("Robot Enabled")
 
             else:
-                print("Robot Not Enabled")
+                pass
 
 
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+
+    except KeyboardInterrupt:
+        pass
