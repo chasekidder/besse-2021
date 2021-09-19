@@ -23,13 +23,8 @@
 # Xpad docs https://www.kernel.org/doc/Documentation/input/xpad.txt
 # https://wiki.unity3d.com/index.php?title=Xbox360Controller
 
-import modules.drive as drive
-
-from inputs import devices, get_gamepad
 import time
-
-#robot = drive.DriveTrain()
-
+from inputs import devices, get_gamepad
 
 
 class LED_MODE:
@@ -54,6 +49,7 @@ class LED_MODE:
 class controller():
     def __init__(self) -> None:
         self.__controller = devices.gamepads[0]
+
         self.buttons = {
             "BTN_START": 0,
             "BTN_MODE": 0,
